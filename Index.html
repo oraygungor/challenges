@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f5f0">
+  <title>Our 10 Challenges · Oray & Gamze</title>
+  <style>
+    :root { color-scheme: light; --ink:#272136; --muted:#857e91; --pink:#df658b; --purple:#806ab7; --bg:#f8f5f0; --line:#e8e1e9; --surface:#fffefd; --soft:#f4edf4; --green:#2b966b; }
+    * {box-sizing:border-box}
+    body {margin:0;background:radial-gradient(circle at 4% 0%,#f8e4e8 0,transparent 32%),radial-gradient(circle at 95% 19%,#f0e8fa 0,transparent 35%),var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100dvh;}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    button:disabled{cursor:wait;opacity:.6}
+    .wrap{width:min(100% - 32px,640px);margin:auto;padding:28px 0 max(55px,env(safe-area-inset-bottom))}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:30px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:14px}
+    .logoMark{width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:var(--ink);color:#fff;font-size:17px}
+    .loginTag{font-size:12px;background:#fff9;padding:8px 11px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+    .textBtn{border:0;background:none;color:var(--muted);padding:8px 4px;font-size:13px}
+    .eyebrow{text-transform:uppercase;letter-spacing:.19em;font-size:11px;font-weight:800;color:var(--pink)}
+    h1{font-size:clamp(36px,9vw,60px);letter-spacing:-.065em;line-height:1.06;margin:13px 0 16px;font-weight:850}
+    h2{font-size:22px;letter-spacing:-.045em;margin:0 0 8px}
+    p{line-height:1.55}
+    .lead{font-size:15px;color:var(--muted);margin:0 0 26px;max-width:470px}
+    .hero{margin-bottom:28px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:0 14px 50px #5440500c;padding:22px;margin-bottom:14px}
+    .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .small{font-size:12px;color:var(--muted)}
+    .progressTrack{height:10px;border-radius:999px;background:#eee7eb;overflow:hidden;margin-top:14px}
+    .progressFill{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .25s;border-radius:999px}
+    .stats{display:flex;align-items:baseline;gap:6px}
+    .bigNumber{font-size:34px;letter-spacing:-.06em;font-weight:800}
+    .callout{padding:17px 18px;border:1px solid #edd8e5;background:#fff5f9;border-radius:18px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .callout strong{display:block;font-size:15px;margin:0 0 4px}
+    .callout p{font-size:12px;color:var(--muted);margin:0}
+    .turn{background:var(--pink);color:white;font-size:12px;font-weight:800;border-radius:999px;padding:7px 12px;white-space:nowrap}
+    .fieldLabel{font-size:12px;font-weight:800;margin-bottom:10px;display:block}
+    textarea,.pinInput{border:1px solid #ded7e4;background:white;border-radius:14px;padding:15px;width:100%;outline:none;color:var(--ink);transition:border .2s,box-shadow .2s}
+    textarea:focus,.pinInput:focus{border-color:var(--purple);box-shadow:0 0 0 3px #806ab71b}
+    textarea{min-height:105px;resize:vertical;line-height:1.4}
+    .primary{background:var(--ink);color:white;border:none;border-radius:14px;padding:15px 19px;font-size:14px;font-weight:750;width:100%;min-height:51px}
+    .primary:hover{background:#41344f}
+    .outline{background:white;color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14px;font-weight:750}
+    .inlineRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0}
+    .count{font-size:12px;color:var(--muted)}
+    .challenge{background:#fff;border:1px solid var(--line);padding:17px 17px 16px;border-radius:19px;margin-bottom:10px}
+    .challengeHead{display:flex;gap:12px;align-items:flex-start}
+    .number{font-size:12px;font-weight:850;background:#f3eaf2;color:#725a86;min-width:34px;min-height:34px;display:grid;place-items:center;border-radius:10px}
+    .challengeTitle{font-size:15px;font-weight:750;line-height:1.45;overflow-wrap:anywhere}
+    .challengeMeta{font-size:11px;color:var(--muted);margin-top:5px}
+    .checkGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+    .checkItem{display:flex;flex-direction:column;gap:5px;background:#f9f7fa;padding:12px;border-radius:13px;border:1px solid transparent}
+    .checkItem.done{background:#f1faf4;border-color:#cee8d7}
+    .checkItem.readOnly{opacity:.72}
+    .checkMain{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:750}
+    .checkMain input{width:19px;height:19px;accent-color:var(--green);margin:0;flex-shrink:0}
+    .checkDate{font-size:10px;color:var(--muted);padding-left:28px;min-height:13px}
+    .mutedNote{background:#fff9;padding:14px;border:1px dashed #e5dbe5;border-radius:15px;color:var(--muted);font-size:12px;line-height:1.6}
+    .loginPanel{max-width:460px;margin:60px auto 0}
+    .choiceRow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+    .choice{border:1px solid var(--line);padding:16px 10px;border-radius:16px;background:#fff;color:var(--ink);font-weight:750;text-align:center}
+    .choice.selected{border-color:var(--purple);background:#f3edfa;box-shadow:0 0 0 2px #806ab712}
+    .loginIcon{font-size:22px;margin-bottom:8px}
+    .subhead{font-size:13px;color:var(--muted);margin:0 0 22px}
+    .error{color:#a12d4e;background:#fff0f2;border:1px solid #f2cdd7;border-radius:12px;padding:12px;margin:13px 0;font-size:12px;display:none;line-height:1.4}
+    .loading{display:flex;align-items:center;justify-content:center;min-height:60vh;color:var(--muted);font-size:14px}
+    .footer{text-align:center;font-size:12px;color:#b0a6b2;margin-top:30px}
+    .hidden{display:none!important}
+    .toast{position:fixed;bottom:max(20px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;z-index:10;background:var(--ink);color:white;border-radius:13px;padding:12px 16px;font-size:13px;box-shadow:0 6px 30px #0003;opacity:0;pointer-events:none;transition:opacity .2s}
+    .toast.show{opacity:1}
+    @media(max-width:420px){.wrap{width:calc(100% - 28px);padding-top:18px}.card{padding:18px;border-radius:20px}.challenge{padding:14px}.callout{padding:14px}h1{font-size:41px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="logo"><span class="logoMark">✦</span><span>O & G / THE CHALLENGE</span></div>
+    <div id="signedIn" class="hidden"><span id="who" class="loginTag"></span> <button id="logout" type="button" class="textBtn">Log out</button></div>
+  </header>
+
+  <div id="loading" class="loading">Loading our journey…</div>
+
+  <section id="loginPage" class="loginPanel hidden">
+    <div class="eyebrow">A LITTLE ADVENTURE TOGETHER</div>
+    <h1>Our 10<br>Challenges<span style="color:var(--pink)">.</span></h1>
+    <p class="lead">Two people. Ten challenges. One shared adventure.</p>
+    <div class="card">
+      <h2>Who's joining?</h2>
+      <p class="subhead">Select your name and enter your private PIN.</p>
+      <div class="choiceRow">
+        <button type="button" class="choice" data-user="Oray"><div class="loginIcon">✦</div>Oray</button>
+        <button type="button" class="choice" data-user="Gamze"><div class="loginIcon">✧</div>Gamze</button>
+      </div>
+      <form id="loginForm">
+        <label for="pin" class="fieldLabel">Your PIN</label>
+        <input id="pin" class="pinInput" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" placeholder="6–12 digits" autocomplete="off" required>
+        <p id="loginError" class="error" role="alert"></p>
+        <button class="primary" type="submit" id="loginSubmit">Enter our challenge</button>
+      </form>
+    </div>
+  </section>
+
+  <main id="mainPage" class="hidden">
+    <section class="hero">
+      <div class="eyebrow" id="phaseLabel">OUR SHARED JOURNEY</div>
+      <h1>Our 10<br>Challenges<span style="color:var(--pink)">.</span></h1>
+      <p class="lead" id="phaseSubtitle"></p>
+    </section>
+    <section class="card">
+      <div class="meta">
+        <div><div class="small" id="progressLabel">Our progress</div><div class="stats"><span id="progressCount" class="bigNumber">0</span><span id="progressMax" class="small">/10</span></div></div>
+        <span id="progressHint" class="small"></span>
+      </div>
+      <div class="progressTrack"><div id="progressFill" class="progressFill"></div></div>
+    </section>
+
+    <section id="createPhase" class="hidden">
+      <div class="callout"><div><strong id="turnTitle">Oray's turn</strong><p id="turnSub">Add the next challenge to our list.</p></div><span id="turnBadge" class="turn">YOUR TURN</span></div>
+      <div id="addPanel" class="card hidden">
+        <form id="addForm">
+          <label class="fieldLabel" for="newChallenge">What's your next challenge?</label>
+          <textarea id="newChallenge" maxlength="180" minlength="3" placeholder="Something fun, thoughtful, adventurous…" required></textarea>
+          <div class="inlineRow"><span class="small">Keep it between 3 and 180 characters.</span><span id="charCount" class="count">0/180</span></div>
+          <button type="submit" id="addSubmit" class="primary">Add challenge</button>
+        </form>
+      </div>
+      <div id="waitPanel" class="mutedNote hidden">Waiting for the other person to add a challenge. This page checks for updates automatically.</div>
+      <div class="inlineRow"><h2>Our list so far</h2><span id="listCount" class="small"></span></div>
+      <div id="draftList"></div>
+    </section>
+
+    <section id="activePhase" class="hidden">
+      <div class="callout"><div><strong>The challenge has begun!</strong><p>Check off each challenge as you complete it. Only your own checkboxes can be changed.</p></div><span class="turn">LET'S GO</span></div>
+      <div class="inlineRow"><h2>Challenge board</h2><span class="small">10 challenges</span></div>
+      <div id="activeList"></div>
+      <div id="finishedBanner" class="mutedNote hidden" style="text-align:center">All 20 completions are done. You both finished the challenge journey!</div>
+    </section>
+    <footer class="footer">Made for Oray & Gamze · Saved in our shared Google Sheet</footer>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  'use strict';
+  const STORAGE_KEY='oray-gamze-session-v1';
+  const el=id=>document.getElementById(id);
+  const state={user:null,token:null,data:null,busy:false,selected:null};
+  let toastTimer;
+
+  function notify(msg){const node=el('toast');node.textContent=msg;node.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.classList.remove('show'),3600);}
+  function errorMessage(err){return err&&err.message ? err.message : 'Something went wrong. Please try again.';}
+  function showLoginError(msg){el('loginError').textContent=msg;el('loginError').style.display='block';}
+  function setLoading(on){state.busy=on;['loginSubmit','addSubmit'].forEach(id=>{const b=el(id);if(b)b.disabled=on;});}
+  function safeDate(s){if(!s)return 'Not yet';const d=new Date(s);return Number.isNaN(d.getTime())?'Not yet':new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d);}
+  function div(cls,txt){const n=document.createElement('div');if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n;}
+  function hideAll(){el('loading').classList.add('hidden');el('loginPage').classList.add('hidden');el('mainPage').classList.add('hidden');}
+  function showLogin(){hideAll();el('signedIn').classList.add('hidden');el('loginPage').classList.remove('hidden');state.user=null;state.token=null;state.data=null;el('pin').value='';}
+  function logout(clearRemote){const old=state.token;localStorage.removeItem(STORAGE_KEY);showLogin();if(clearRemote&&old&&window.google&&google.script&&google.script.run){google.script.run.withFailureHandler(()=>{}).logout(old);}}
+  function onFailure(err){setLoading(false);const msg=errorMessage(err);if(msg.indexOf('SESSION_EXPIRED')!==-1){logout(false);notify('Session expired. Please sign in again.');return;}notify(msg);}
+  function getReady(){if(!(window.google&&google.script&&google.script.run)){hideAll();el('loginPage').classList.remove('hidden');showLoginError('Open the deployed Google Apps Script web app URL. This HTML file alone cannot save data.');return false;}return true;}
+  function enter(payload){state.user=payload.user;state.token=payload.token;state.data=payload.state;localStorage.setItem(STORAGE_KEY,JSON.stringify({user:state.user,token:state.token}));hideAll();el('mainPage').classList.remove('hidden');el('signedIn').classList.remove('hidden');el('who').textContent=state.user;render();}
+  function refresh(silent){if(!state.token||state.busy||!getReady())return;google.script.run.withSuccessHandler(payload=>{state.user=payload.user;state.data=payload.state;render();}).withFailureHandler(err=>{if(errorMessage(err).includes('SESSION_EXPIRED')){logout(false);notify('Please sign in again.');}else if(!silent)notify(errorMessage(err));}).getState(state.token);}
+
+  function render(){const data=state.data;if(!data)return;const list=data.challenges;const active=data.phase==='active';el('phaseLabel').textContent=active?'THE JOURNEY HAS BEGUN':'BUILDING OUR ADVENTURE';el('phaseSubtitle').textContent=active?'Ten little adventures. Your moments, your dates, your memories.':'Take turns choosing five challenges each. Oray goes first.';
+    el('createPhase').classList.toggle('hidden',active);el('activePhase').classList.toggle('hidden',!active);
+    const done=list.reduce((n,c)=>n+Number(!!c.orayDoneAt)+Number(!!c.gamzeDoneAt),0);
+    el('progressLabel').textContent=active?'Individual completions':'Challenges created';el('progressCount').textContent=active?done:list.length;el('progressMax').textContent=active?'/20':'/10';el('progressHint').textContent=active?`${Math.round(done/20*100)}% complete`:`${10-list.length} to go`;el('progressFill').style.width=(active?done/20*100:list.length*10)+'%';
+    if(active){renderActive(list);el('finishedBanner').classList.toggle('hidden',done!==20);}else{const turn=data.nextUser;const myTurn=turn===state.user;el('turnTitle').textContent=turn+"'s turn";el('turnSub').textContent=myTurn?'Your next challenge is waiting.':'You can add another after '+turn+' has added theirs.';el('turnBadge').textContent=myTurn?'YOUR TURN':'WAITING';el('turnBadge').style.background=myTurn?'var(--pink)':'var(--purple)';el('addPanel').classList.toggle('hidden',!myTurn);el('waitPanel').classList.toggle('hidden',myTurn);el('listCount').textContent=list.length+' of 10';renderDraft(list);}
+  }
+  function makeHead(c){const head=div('challengeHead');head.appendChild(div('number',String(c.id).padStart(2,'0')));const right=div('');right.style.flex='1';right.appendChild(div('challengeTitle',c.title));right.appendChild(div('challengeMeta','Added by '+c.addedBy+' · '+safeDate(c.createdAt)));head.appendChild(right);return head;}
+  function renderDraft(list){const parent=el('draftList');parent.replaceChildren();if(!list.length){parent.appendChild(div('mutedNote','Nothing here yet. The first challenge begins with Oray.'));return;}for(const c of list){const box=div('challenge');box.appendChild(makeHead(c));parent.appendChild(box);}}
+  function renderActive(list){const parent=el('activeList');parent.replaceChildren();for(const c of list){const box=div('challenge');box.appendChild(makeHead(c));const grid=div('checkGrid');for(const name of ['Oray','Gamze']){const checked=!!(name==='Oray'?c.orayDoneAt:c.gamzeDoneAt);const cell=div('checkItem'+(checked?' done':'')+(name!==state.user?' readOnly':''));const label=document.createElement('label');label.className='checkMain';const check=document.createElement('input');check.type='checkbox';check.checked=checked;check.disabled=name!==state.user||state.busy;check.setAttribute('aria-label',name+' completed challenge '+c.id);check.addEventListener('change',()=>toggle(c.id,check.checked));label.appendChild(check);label.appendChild(document.createTextNode(name));cell.appendChild(label);cell.appendChild(div('checkDate',checked?safeDate(name==='Oray'?c.orayDoneAt:c.gamzeDoneAt):'Not completed'));grid.appendChild(cell);}box.appendChild(grid);parent.appendChild(box);}}
+  function toggle(id,done){if(state.busy)return;setLoading(true);google.script.run.withSuccessHandler(data=>{setLoading(false);state.data=data;render();notify(done?'Marked as completed.':'Completion removed.');}).withFailureHandler(err=>{onFailure(err);render();}).setCompleted(state.token,id,done);}
+
+  document.querySelectorAll('[data-user]').forEach(btn=>btn.addEventListener('click',()=>{state.selected=btn.getAttribute('data-user');document.querySelectorAll('[data-user]').forEach(b=>b.classList.toggle('selected',b===btn));el('loginError').style.display='none';el('pin').focus();}));
+  el('loginForm').addEventListener('submit',e=>{e.preventDefault();if(!state.selected){showLoginError('Choose Oray or Gamze first.');return;}if(!getReady())return;setLoading(true);el('loginError').style.display='none';google.script.run.withSuccessHandler(payload=>{setLoading(false);enter(payload);}).withFailureHandler(err=>{setLoading(false);showLoginError(errorMessage(err));}).login(state.selected,el('pin').value);});
+  el('addForm').addEventListener('submit',e=>{e.preventDefault();const text=el('newChallenge').value.trim();if(text.length<3){notify('Write at least 3 characters.');return;}setLoading(true);google.script.run.withSuccessHandler(data=>{setLoading(false);el('newChallenge').value='';el('charCount').textContent='0/180';state.data=data;render();notify('Challenge added!');}).withFailureHandler(onFailure).addChallenge(state.token,text);});
+  el('newChallenge').addEventListener('input',()=>el('charCount').textContent=el('newChallenge').value.length+'/180');
+  el('logout').addEventListener('click',()=>logout(true));
+  const previous=(()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');}catch(_){return null;}})();
+  if(getReady()&&previous&&previous.token){state.token=previous.token;google.script.run.withSuccessHandler(payload=>{enter({user:payload.user,token:state.token,state:payload.state});}).withFailureHandler(()=>{logout(false);}).getState(state.token);}else{showLogin();}
+  setInterval(()=>{if(!document.hidden&&state.data&&!state.busy)refresh(true);},30000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.data)refresh(true);});
+})();
+</script>
+</body>
+</html>
